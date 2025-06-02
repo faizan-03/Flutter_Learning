@@ -33,6 +33,12 @@ class Home extends StatelessWidget {
           children: [
             IconButton(icon: Icon(Icons.home), onPressed: () {}),
             IconButton(icon: Icon(Icons.settings), onPressed: () {}),
+            IconButton(
+              icon: Icon(Icons.login),
+              onPressed: () {
+                Navigator.pushNamed(context, '/login'); // Navigate to LoginPage
+              },
+            ),
           ],
         ),
       ),
