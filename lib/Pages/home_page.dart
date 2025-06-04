@@ -1,47 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/utils/routes.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
 
   @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  bool _isHovering = false; // Variable to track hover state for the close icon
+  @override
   Widget build(BuildContext context) {
-    var day2 = 30;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: Text('Home Page'),
         centerTitle: true,
-        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 24),
-        backgroundColor: const Color.fromARGB(255, 96, 179, 212),
+        titleTextStyle: TextStyle(color: Colors.white, fontSize: 24),
+        backgroundColor: Color.fromARGB(255, 96, 179, 212),
       ),
       body: Center(
-        child: Container(
-          color: Colors.blue,
-          padding: EdgeInsets.all(20),
-          child: Text(
-            'Hello, World! \nWelcome to $day2 days of Flutter.',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 24, color: Colors.white),
-          ),
+        child: Text(
+          'Welcome to the Home Page!',
+          style: TextStyle(fontSize: 24, color: Colors.black),
         ),
       ),
-      drawer: Drawer(), // Optional: Add a Drawer widget if needed
-      bottomNavigationBar: BottomAppBar(
-        color: const Color.fromARGB(255, 223, 11, 184),
-        shape: CircularNotchedRectangle(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+      drawer: Drawer(
+        child: Column(
           children: [
-            IconButton(icon: Icon(Icons.home), onPressed: () {}),
-            IconButton(icon: Icon(Icons.settings), onPressed: () {}),
-            IconButton(
-              icon: Icon(Icons.login),
+            // Cross sign to close the drawer
+            Align(
+              alignment: Alignment.topRight,
+              child: MouseRegion(
+                onEnter: (_) => setState(() => _isHovering = true),
+                onExit: (_) => setState(() => _isHovering = false),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.close,
+                    color: _isHovering ? Colors.red : Colors.black,
+                    size: 30,
+                  ),
+                  splashColor: Colors.redAccent,
+                  onPressed: () {
+                    Navigator.pop(context); // Close the drawer
+                  },
+                ),
+              ),
+            ),
+            // Spacer
+            SizedBox(height: 20),
+            // Logout button
+            ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/login'); // Navigate to LoginPage
+                // Add your logout logic here
+                Navigator.popAndPushNamed(
+                  context,
+                  MyRoutes.starterRoute,
+                ); // Close the drawer after logout
               },
+              child: Text('Logout'),
             ),
           ],
         ),
-      ),
+      ), // Optional: Add a Drawer widget if needed
     );
   }
 }

@@ -4,8 +4,18 @@ import 'package:logging/logging.dart';
 
 final Logger _logger = Logger('LoginPage');
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  // ignore: unnecessary_nullable_for_final_variable_declarations
+  String? name = '';
+  bool changebutton = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +41,7 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                'WELCOME TO ALUMNII',
+                'WELCOME TO HCS ${name ?? ''}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
@@ -48,13 +58,19 @@ class LoginPage extends StatelessWidget {
                   children: [
                     SizedBox(height: 20),
                     TextFormField(
+                      onChanged: (value) {
+                        name = value;
+                        setState(() {
+                          _logger.info('Username changed to: $name');
+                        });
+                      },
                       decoration: InputDecoration(
-                        labelText: 'Email',
+                        labelText: 'Username',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         prefixIcon: Icon(Icons.email),
-                        hintText: 'Enter your email',
+                        hintText: 'Enter your username',
                       ),
                     ),
                     SizedBox(height: 20), // Add some space between fields
@@ -70,24 +86,68 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 29), // Add some space between fields
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 50,
-                          vertical: 15,
-                        ),
-                        minimumSize: Size(150, 50),
-                        textStyle: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onPressed: () {
+
+                    InkWell(
+                      onTap: () async {
+                        setState(() {
+                          changebutton = true;
+                        });
                         _logger.info('Login button pressed');
+                        await Future.delayed(Duration(seconds: 1));
                         Navigator.pushNamed(context, MyRoutes.homeRoute);
                       },
-                      child: Text('Login'),
+                      child: AnimatedContainer(
+                        duration: Duration(seconds: 1),
+                        width: changebutton ? 50 : 150,
+                        height: 50,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            changebutton ? 50 : 10,
+                          ),
+                          gradient:
+                              changebutton
+                                  ? LinearGradient(
+                                    colors: [
+                                      Colors.deepOrange,
+                                      Colors.deepOrangeAccent,
+                                    ],
+                                  )
+                                  : null,
+                          color: Colors.deepPurple,
+                        ),
+                        child:
+                            changebutton
+                                ? Icon(Icons.done, color: Colors.white)
+                                : Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                      ),
                     ),
+
+                    // ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(
+                    //     padding: EdgeInsets.symmetric(
+                    //       horizontal: 50,
+                    //       vertical: 15,
+                    //     ),
+                    //     minimumSize: Size(150, 50),
+                    //     textStyle: TextStyle(
+                    //       fontSize: 20,
+                    //       fontWeight: FontWeight.bold,
+                    //     ),
+                    //   ),
+                    //   onPressed: () {
+                    //     _logger.info('Login button pressed');
+                    //     Navigator.pushNamed(context, MyRoutes.homeRoute);
+                    //   },
+                    //   child: Text('Login'),
+                    // ),
                   ],
                 ),
               ),
