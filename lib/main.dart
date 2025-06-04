@@ -2,9 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Pages/home_page.dart';
 import 'package:flutter_application_1/Pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logging/logging.dart';
 
 void main() {
+  _setupLogging(); // Set up logging for the app
   runApp(MyApp());
+}
+
+void _setupLogging() {
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((record) {
+    print(
+      '${record.level.name}: ${record.time}: ${record.message} : ${record.loggerName}',
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+
+final Logger _logger = Logger('LoginPage');
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -74,7 +77,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      print('Login button pressed');
+                      _logger.info('Login button pressed');
                     },
                     child: Text('Login'),
                   ),
