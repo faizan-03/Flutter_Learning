@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:flutter_application_1/utils/routes.dart';
+import 'package:flutter_application_1/widgets/drawer.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -9,6 +11,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  // ignore: unused_field, prefer_final_fields
   bool _isHovering = false; // Variable to track hover state for the close icon
   @override
   Widget build(BuildContext context) {
@@ -25,57 +28,7 @@ class _HomepageState extends State<Homepage> {
           style: TextStyle(fontSize: 24, color: Colors.black),
         ),
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            // Cross sign to close the drawer
-            Align(
-              alignment: Alignment.topRight,
-              child: MouseRegion(
-                onEnter: (_) => setState(() => _isHovering = true),
-                onExit: (_) => setState(() => _isHovering = false),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.close,
-                    color: _isHovering ? Colors.red : Colors.black,
-                    size: 30,
-                  ),
-                  splashColor: Colors.redAccent,
-                  onPressed: () {
-                    Navigator.pop(context); // Close the drawer
-                  },
-                ),
-              ),
-            ),
-            // Spacer
-            SizedBox(height: 20),
-            // Logout button
-            ElevatedButton(
-              onPressed: () {
-                // Add your logout logic here
-                Navigator.popAndPushNamed(
-                  context,
-                  MyRoutes.starterRoute,
-                ); // Close the drawer after logout
-              },
-              child: Text('Logout'),
-            ),
-
-            SizedBox(height: 20),
-            // Logout button
-            ElevatedButton(
-              onPressed: () {
-                // Add your logout logic here
-                Navigator.popAndPushNamed(
-                  context,
-                  MyRoutes.loginRoute,
-                ); // Close the drawer after logout
-              },
-              child: Text('Back'),
-            ),
-          ],
-        ),
-      ), // Optional: Add a Drawer widget if needed
+      drawer: MyDrawer(), // Optional: Add a Drawer widget if needed
     );
   }
 }

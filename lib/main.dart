@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
       // initialRoute: '/', // Set the initial route to Home widget
       title: 'Flutter Demo', // Set the title of the app
 
+      initialRoute: MyRoutes.homeRoute,
       routes: {
         MyRoutes.starterRoute:
             (context) => Starter(), // Set the home route to Starter widget
