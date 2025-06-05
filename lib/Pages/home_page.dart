@@ -60,6 +60,19 @@ class _HomepageState extends State<Homepage> {
               },
               child: Text('Logout'),
             ),
+
+            SizedBox(height: 20),
+            // Logout button
+            ElevatedButton(
+              onPressed: () {
+                // Add your logout logic here
+                Navigator.popAndPushNamed(
+                  context,
+                  MyRoutes.loginRoute,
+                ); // Close the drawer after logout
+              },
+              child: Text('Back'),
+            ),
           ],
         ),
       ), // Optional: Add a Drawer widget if needed
