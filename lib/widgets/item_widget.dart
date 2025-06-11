@@ -7,6 +7,7 @@ final Logger _logger = Logger('ItemWidget');
 class ItemWidget extends StatelessWidget {
   final Item item;
 
+  // ignore: use_super_parameters
   const ItemWidget({Key? key, required this.item}) : super(key: key);
 
   @override

@@ -1,15 +1,5 @@
 class CatalogModels {
-  static final items = [
-    Item(
-      id: 1,
-      name: "Wireless Headphones",
-      description: "High-quality wireless headphones with noise cancellation.",
-      price: 99.99,
-      color: "#1E1E1E",
-      imageUrl:
-          "https://dummyjson.com/image/300x300/1E1E1E/FFFFFF?text=Headphones",
-    ),
-  ];
+  static List<Item> items = [];
 }
 
 class Item {
@@ -28,4 +18,24 @@ class Item {
     required this.color,
     required this.imageUrl,
   });
+
+  factory Item.fromMap(Map<String, dynamic> json) {
+    return Item(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      price: json['price'].toDouble(),
+      color: json['color'],
+      imageUrl: json['imageUrl'],
+    );
+  }
+
+  toMap() => {
+    'id': id,
+    'name': name,
+    'description': description,
+    'price': price,
+    'color': color,
+    'imageUrl': imageUrl,
+  };
 }

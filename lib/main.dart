@@ -38,7 +38,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Hide the debug banner
       // initialRoute: '/', // Set the initial route to Home widget
       title: 'Flutter Demo', // Set the title of the app
-
       initialRoute: MyRoutes.homeRoute,
       routes: {
         MyRoutes.starterRoute:
