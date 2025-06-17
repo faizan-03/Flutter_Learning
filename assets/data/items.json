@@ -1,45 +1,44 @@
 {
-"products":[
-
-  {
-    "id": 1,
-    "name": "Wireless Headphones",
-    "description": "High-quality wireless headphones with noise cancellation.",
-    "price": 99.99,
-    "color": "#1E1E1E",
-    "imageUrl": "https://dummyjson.com/image/300x300/1E1E1E/FFFFFF?text=Headphones"
-  },
-  {
-    "id": 2,
-    "name": "Smart Watch",
-    "description": "Stay connected with this sleek and functional smartwatch.",
-    "price": 149.49,
-    "color": "#0047AB",
-    "imageUrl": "https://dummyjson.com/image/300x300/0047AB/FFFFFF?text=Smart+Watch"
-  },
-  {
-    "id": 3,
-    "name": "Gaming Mouse",
-    "description": "Ergonomic design with RGB lighting for gamers.",
-    "price": 59.99,
-    "color": "#00FF7F",
-    "imageUrl": "https://dummyjson.com/image/300x300/00FF7F/000000?text=Gaming+Mouse"
-  },
-  {
-    "id": 4,
-    "name": "Bluetooth Speaker",
-    "description": "Compact speaker with powerful sound.",
-    "price": 39.99,
-    "color": "#FF4500",
-    "imageUrl": "https://dummyjson.com/image/300x300/FF4500/FFFFFF?text=Speaker"
-  },
-  {
-    "id": 5,
-    "name": "Laptop Stand",
-    "description": "Adjustable aluminum stand for laptops.",
-    "price": 29.99,
-    "color": "#CCCCCC",
-    "imageUrl": "https://dummyjson.com/image/300x300/CCCCCC/000000?text=Laptop+Stand"
-  }
-]
+  "products": [
+    {
+      "id": 1,
+      "name": "Headphones",
+      "description": "High-quality wireless headphones with noise cancellation.",
+      "price": 99.99,
+      "color": "#1E1E1E",
+      "imageUrl": "https://dummyjson.com/image/300x300/1E1E1E/FFFFFF.png?text=Headphones"
+    },
+    {
+      "id": 2,
+      "name": "Smart Watch",
+      "description": "Stay connected with this sleek and functional smartwatch.",
+      "price": 149.49,
+      "color": "#0047AB",
+      "imageUrl": "https://dummyjson.com/image/300x300/0047AB/FFFFFF.png?text=Smart+Watch"
+    },
+    {
+      "id": 3,
+      "name": "Gaming Mouse",
+      "description": "Ergonomic design with RGB lighting for gamers.",
+      "price": 59.99,
+      "color": "#00FF7F",
+      "imageUrl": "https://dummyjson.com/image/300x300/00FF7F/000000.png?text=Gaming+Mouse"
+    },
+    {
+      "id": 4,
+      "name": "Bluetooth Speaker",
+      "description": "Compact speaker with powerful sound.",
+      "price": 39.99,
+      "color": "#FF4500",
+      "imageUrl": "https://dummyjson.com/image/300x300/FF4500/FFFFFF.png?text=Speaker"
+    },
+    {
+      "id": 5,
+      "name": "Laptop Stand",
+      "description": "Adjustable aluminum stand for laptops.",
+      "price": 29.99,
+      "color": "#CCCCCC",
+      "imageUrl": "https://dummyjson.com/image/300x300/CCCCCC/000000.png?text=Laptop+Stand"
+    }
+  ]
 }
