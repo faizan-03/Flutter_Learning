@@ -31,7 +31,7 @@ class CatalogItem extends StatelessWidget {
                   children: [
                     "\$${catalog.price}".text.bold.xl.make(),
 
-                    ElevatedButton(onPressed: () {}, child: "Buy".text.make()),
+                    ElevatedButton(onPressed: () {}, child: "Cart".text.make()),
                   ],
                 ),
               ],
@@ -39,6 +39,6 @@ class CatalogItem extends StatelessWidget {
           ),
         ],
       ),
-    ).white.roundedLg.p16.make().py8();
+    ).white.roundedLg.p12.make().py4();
   }
 }

@@ -3,4 +3,5 @@ class MyRoutes {
   static const String homeRoute = '/home'; // Home page route
   static const String starterRoute = '/'; // Starter page route
   static const String homeDetailRoute = "/details";
+  static const String cartRoute = "/cart"; // Cart page route
 }
