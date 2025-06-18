@@ -17,6 +17,7 @@ class HomeDetailPage extends StatelessWidget {
         elevation: 0,
       ),
       backgroundColor: context.canvasColor,
+      // ignore: deprecated_member_use
       bottomNavigationBar: ButtonBar(
         alignment: MainAxisAlignment.spaceBetween,
         buttonPadding: const EdgeInsets.all(16.0),

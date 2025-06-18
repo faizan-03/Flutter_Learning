@@ -1,5 +1,20 @@
 class CatalogModels {
   static List<Item> items = [];
+
+  static Item getById(int id) => items.firstWhere(
+    (element) => element.id == id,
+    orElse:
+        () => Item(
+          id: 0,
+          name: 'Not Found',
+          description: 'Item not found',
+          price: 0.0,
+          color: 'N/A',
+          imageUrl: '',
+        ),
+  );
+
+  static Item getByPosition(int pos) => items[pos];
 }
 
 class Item {
