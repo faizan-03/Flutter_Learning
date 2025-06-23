@@ -1,4 +1,8 @@
+// ignore_for_file: unused_element_parameter
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/store.dart';
+import 'package:flutter_application_1/models/cart.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CartPage extends StatelessWidget {
@@ -15,20 +19,46 @@ class CartPage extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class _cartTotal extends StatelessWidget {
+  // ignore: duplicate_ignore
+  // ignore: unused_element_parameter
   const _cartTotal({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
+    final CartModel? _cart = (VxState.store as MyStore).cart;
     return SizedBox(
-      height: 200,
+      height: 100,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$9999".text.xl5.color(Colors.red).make(),
+          VxConsumer<MyStore>(
+            mutations: {RemoveMutation},
+            builder: (context, store, _) {
+              return "\$${_cart?.totalPrice}".text.xl5.color(Colors.red).make();
+            },
+          ),
+
           30.widthBox,
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              if (_cart?.items.isEmpty ?? true) {
+                // Check if cart is empty
+                VxToast.show(
+                  context,
+                  msg: "No items in cart",
+                  position: VxToastPosition.center,
+                );
+              } else {
+                VxToast.show(
+                  context,
+                  msg: "Not implemented yet",
+                  position: VxToastPosition.center,
+                );
+              }
+            },
             style: ButtonStyle(
               backgroundColor: WidgetStateProperty.all(Colors.red),
             ),
@@ -40,25 +70,36 @@ class _cartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
-  const _CartList({super.key});
-
-  @override
-  State<_CartList> createState() => __CartListState();
-}
-
-class __CartListState extends State<_CartList> {
+class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 4,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: const Icon(Icons.done),
-          title: "Item $index".text.make(),
-          trailing: const Icon(Icons.remove_circle_outline),
-          onTap: () => {},
-        );
+    return VxBuilder<MyStore>(
+      mutations: {RemoveMutation},
+      builder: (context, store, _) {
+        final CartModel? _cart = (VxState.store as MyStore).cart;
+
+        return _cart?.items.isEmpty ??
+                true // Check if cart is empty
+            ? "No items in cart".text.xl4.center.bold
+                .make() // Display message if cart is empty
+            : ListView.builder(
+              itemCount: _cart?.items.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: const Icon(Icons.done),
+                  title: _cart?.items[index].name.text.make(),
+                  trailing: const Icon(Icons.remove_circle_outline),
+                  onTap: () {
+                    RemoveMutation(_cart!.items[index]);
+                    VxToast.show(
+                      context,
+                      msg: "Item removed from cart",
+                      position: VxToastPosition.center,
+                    );
+                  },
+                );
+              },
+            );
       },
     );
   }

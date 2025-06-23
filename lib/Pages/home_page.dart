@@ -1,16 +1,13 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/core/store.dart';
+import 'package:flutter_application_1/models/cart.dart';
+import 'package:flutter_application_1/utils/routes.dart';
 import 'package:flutter_application_1/widgets/Home/catalog_header.dart';
 import 'package:flutter_application_1/widgets/Home/catalog_list.dart';
 import 'package:flutter_application_1/models/catalog.dart';
-// ignore: unused_import
-import 'package:flutter_application_1/utils/routes.dart';
-// ignore: unused_import
-import 'package:flutter_application_1/widgets/drawer.dart';
-// ignore: unused_import
-import 'package:flutter_application_1/widgets/item_widget.dart';
+import 'package:http/http.dart' as http;
 import 'package:velocity_x/velocity_x.dart';
 
 class Homepage extends StatefulWidget {
@@ -30,10 +27,15 @@ class _HomepageState extends State<Homepage> {
     loadData();
   }
 
+  final url = "https://api.jsonbin.io/b/604dbddb683e7e079c4eefd3";
+
   loadData() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
 
     var catalogJson = await rootBundle.loadString('assets/data/items.json');
+    // final response = await http.get(Uri.parse(url));
+    // final catalogJson = response.body;
+
     var decodedData = jsonDecode(catalogJson);
 
     final productsData = decodedData["products"] as List;
@@ -48,13 +50,30 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as MyStore).cart;
+
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
-        backgroundColor: Vx.blue600,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.shopping_cart),
+      floatingActionButton: VxBuilder<MyStore>(
+        mutations: {AddMutation, RemoveMutation},
+        builder: (context, store, _) {
+          final _cart = (VxState.store as MyStore).cart;
+          return FloatingActionButton(
+            onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+            backgroundColor: Vx.blue600,
+            foregroundColor: Colors.white,
+            child: const Icon(Icons.shopping_cart),
+          ).badge(
+            color: Vx.red600,
+            count: _cart?.items.length,
+            size: 22,
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          );
+        },
       ),
+
       body: SafeArea(
         child: Padding(
           padding: Vx.m32,

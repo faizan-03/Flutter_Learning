@@ -3,13 +3,15 @@ import 'package:flutter_application_1/Pages/cart_page.dart';
 import 'package:flutter_application_1/Pages/home_page.dart';
 import 'package:flutter_application_1/Pages/starter.dart';
 import 'package:flutter_application_1/Pages/login_page.dart';
+import 'package:flutter_application_1/core/store.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logging/logging.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 void main() {
   _setupLogging(); // Set up logging for the app
-  runApp(MyApp());
+  runApp(VxState(store: MyStore(), child: MyApp()));
 }
 
 void _setupLogging() {
